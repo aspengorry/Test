@@ -23,7 +23,7 @@ NSCUR<-NSCUR[,2:3]
 graphTwo<- dygraph(NSCUR, ylab = "Unemployment Rate (%)", xlab = "Date") %>%
   dyAxis("y", valueRange = c(0, 20)) %>%
   dyAxis("x", valueRange = c(as.Date("1976-01-01"), as.Date("2023-01-01")), rangePad = 10) %>%
-  dySeries("national unemprate", label= "National", color = "#B22234") %>%
+  dySeries("national unemprate", label= "National", color = "#B22234", dateWindow=c("1976-01-01", "2023-01-01")) %>%
   dySeries("south caroline unemprate", label= "South Carolina", color = "#003366") %>%
   dyOptions(drawPoints = TRUE, strokeWidth = 3) %>%
   dyLegend(width = 100, labelsSeparateLines = TRUE) %>% 
@@ -34,7 +34,7 @@ graphTwo<- dygraph(NSCUR, ylab = "Unemployment Rate (%)", xlab = "Date") %>%
   dyShading(from= "1990-07-01", to=" 1991-03-01", color = "#cecece")%>%
   dyShading(from= "2001-03-01", to="2001-11-01", color = "#cecece") %>%
   dyShading(from = "2007-12-01", to="2009-06-01", color = "#cecece") %>%
-  dyShading(from = "2020-03-01", to= "2021-03-01" ,color = "#FDFD96")
+  dyShading(from = "2020-02-01", to= "2020-04-01" ,color = "#cecece")
 graphTwo
 saveWidget(graphTwo, "dygraph unemployment rate.html")
 
@@ -55,7 +55,7 @@ df <- NSCUR2005 %>%
 
 static_unemp_rate<-ggplot(df, aes(x = date, y = value)) + labs(x = "Date", y="Unemployment Rate") +
   geom_rect(xmin=as.Date("2007-12-01"), xmax=as.Date("2009-06-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
-  geom_rect(xmin=as.Date("2020-03-01"), xmax=as.Date("2021-03-01"), ymin=0, ymax=Inf, fill="#FDFD96", alpha=0.2) +
+  geom_rect(xmin=as.Date("2020-02-01"), xmax=as.Date("2020-04-01"), ymin=0, ymax=Inf, fill="#cecece", alpha=0.2) +
   geom_line(aes(color = variable), size=1) +
   scale_color_manual(values = c("#B22234", "#003366"))+ theme_bw() +
   theme(legend.position = c(.5, .95) ,legend.title=element_blank(), legend.background=element_rect(fill = alpha("white", 0)))
